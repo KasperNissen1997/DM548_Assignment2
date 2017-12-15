@@ -15,7 +15,7 @@ typedef struct Vector Vector;
 
 // actually define the structs
 struct Vector {
-    // TODO: implementation
+    const char *arr[10];
 };
 
 // Initialize a vector to be empty
