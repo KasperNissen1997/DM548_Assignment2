@@ -1,6 +1,7 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
+#include <stdio.h>
 #include <stdlib.h>
 
 //-----------------------------------------------------------------------------
@@ -15,7 +16,8 @@ typedef struct Vector Vector;
 
 // actually define the structs
 struct Vector {
-    const char *arr[10];
+    char arr[10];
+    int index;
 };
 
 // Initialize a vector to be empty

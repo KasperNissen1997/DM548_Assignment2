@@ -16,7 +16,14 @@ void vector_delete(Vector *vector) {
 // Insert a new element at the end of the vector
 // Pre: 'vector' != NULL
 void vector_push(Vector *vector, void *value) {
+    index++;
 
+    // is the index exceeding the bounds of the vector?
+    if (index > vector_capacity(&vector)) {
+
+    }
+
+    vector.arr[index] = value;
 }
 
 // Remove the last element in the vector and return the value
