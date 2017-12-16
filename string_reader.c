@@ -13,7 +13,8 @@ int main (char *argc, char* argv[]){
         vector_push(&v, &line); 
     }
 
-
+    printf("%s", (char*) v.data[v.top]);
+    
     while(vector_size(&v)){
         printf("%s", (char*) vector_pop(&v));
     }
