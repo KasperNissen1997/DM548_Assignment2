@@ -68,18 +68,17 @@ void testVector(Vector *vector, int testData) {
     void* pTest = (void*) testData;
     vector_push(vector, pTest);
 
-    /*
     if (vector->data[vector->top - 1] == pTest) {
         printf("The push was succesfull!\n\n");
     } else {
         printf("The push was NOT succesfull...\n\n");
     }
-    */
 }
 
 
 // TEMP METHOD - REMOVE WHEN DONE
 // Performs various tests to check the programs functionality
+/*
 int main() {
     Vector v;
     Vector *pv = &v;
@@ -97,5 +96,6 @@ int main() {
         printf("Popping: %i...\n", vector_pop(pv));
     }
 
-    return (0);
+    return 0;
 }
+*/
