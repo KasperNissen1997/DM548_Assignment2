@@ -22,7 +22,7 @@ void vector_delete(Vector *vector) {
 void vector_push(Vector *vector, void *value) {
     if (vector->top == vector->size - 1) {
         vector->size *= 2;
-        realloc(vector->data, sizeof(void*) * vector->size);
+        vector->data = realloc(vector->data, sizeof(void*) * vector->size);
     }
     
     vector->data[vector->top] = value;
@@ -32,11 +32,11 @@ void vector_push(Vector *vector, void *value) {
 // Remove the last element in the vector and return the value
 // Pre: the vector is non-empty, 'vector' != NULL
 void* vector_pop(Vector *vector) {
-
-
     vector->top--;
-    vector->data[vector->top] = NULL;
-    return vector->data[vector->top];
+    // void* temp = vector_get_element(vector, vector->top);
+    // vector->data[vector->top] = NULL;
+    // return temp; 
+    return vector_get_element(vector, vector->top);
 }
 
 // Return the number of elements in the vector
@@ -92,7 +92,7 @@ int main() {
         testVector(pv, i);
     }
 
-    printf("Getting element at [0] from vector.data: %i\n", vector_get_element(pv, 0));
+    printf("Getting element at [8] from vector.data: %i\n", vector_get_element(pv, 8));
 
     for (int i = pv->top; i > 0; i--) {
         printf("Popping: %i...\n", vector_pop(pv));
