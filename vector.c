@@ -6,6 +6,7 @@ void vector_init(Vector *vector) {
     vector->top = 0;
     vector->size = 10;
     vector->data = malloc(sizeof(void*) * (vector->size));
+    memset(vector->data, '\0', sizeof(void) * vector->size);
 }
 
 // Deallocate internal structures of the vector
@@ -20,7 +21,7 @@ void vector_delete(Vector *vector) {
 void vector_push(Vector *vector, void *value) {
     if (vector->top == vector->size) {
         vector->size = vector->size * 2;
-        realloc(vector->data, sizeof(void*) * vector->size);
+        vector->data = realloc(vector->data, sizeof(void*) * vector->size);
     } 
     vector->data[vector->top] = value;
     vector->top++;
@@ -29,16 +30,16 @@ void vector_push(Vector *vector, void *value) {
 // Remove the last element in the vector and return the value
 // Pre: the vector is non-empty, 'vector' != NULL
 void *vector_pop(Vector *vector) {
-    void g = vector->data[top-1];
-    vector->data[top-1]=NULL;
-    vector->top--;
+    void *g = vector->data[vector->top-1];
+    vector->data[vector->top-1]=NULL;
+    vector->top=vector->top-1;
     return g;
 }
 
 // Return the number of elements in the vector
 // Pre: 'vector' != NULL
 size_t vector_size(const Vector *vector) {
-    return vector->top-1;
+    return vector->top;
 }
 
 // Return the current capacity of the vector
@@ -57,10 +58,3 @@ void *vector_get_element(const Vector *vector, size_t index) {
 void **vector_get_array(const Vector *vector) {
     return vector->data;
 }
-
-int main(){
-    Vector v;
-    vector_init(&v);
-    vector_get_array(&v);
-    
-    }
