@@ -16,7 +16,7 @@ typedef struct Vector Vector;
 // actually define the structs
 struct Vector {
     void** data;
-    int size;   
+    int size;
     int top;
 };
 
