@@ -20,7 +20,7 @@ void vector_delete(Vector *vector) {
 // Insert a new element at the end of the vector
 // Pre: 'vector' != NULL
 void vector_push(Vector *vector, void *value) {
-    if (vector->top == vector->size) {
+    if (vector->top == vector->size - 1) {
         vector->size *= 2;
         realloc(vector->data, sizeof(void*) * vector->size);
     }
@@ -35,13 +35,14 @@ void* vector_pop(Vector *vector) {
 
 
     vector->top--;
+    vector->data[vector->top] = NULL;
     return vector->data[vector->top];
 }
 
 // Return the number of elements in the vector
 // Pre: 'vector' != NULL
 size_t vector_size(const Vector *vector) {
-    return vector->top;
+    return vector->top - 1;
 }
 
 // Return the current capacity of the vector
@@ -69,11 +70,13 @@ void testVector(Vector *vector, int testData) {
     void* pTest = (void*) testData;
     vector_push(vector, pTest);
 
+    /*
     if (vector->data[vector->top - 1] == pTest) {
         printf("The push was succesfull!\n\n");
     } else {
         printf("The push was NOT succesfull...\n\n");
     }
+    */
 }
 
 
@@ -85,24 +88,18 @@ int main() {
 
     vector_init(pv);
 
-    testVector(pv, 12);
-    testVector(pv, 15);
-    testVector(pv, 8);
-    testVector(pv, 22);
-    testVector(pv, 12);
-    testVector(pv, 15);
-    testVector(pv, 8);
-    testVector(pv, 22);
-    testVector(pv, 12);
-    testVector(pv, 15);
-    testVector(pv, 8);
-    testVector(pv, 22);
+    for (int i = 0; i < 50; i++) {
+        testVector(pv, i);
+    }
 
-    for (int i = pv->top; i > 1; i--) {
+    printf("Getting element at [0] from vector.data: %i\n", vector_get_element(pv, 0));
+
+    for (int i = pv->top; i > 0; i--) {
         printf("Popping: %i...\n", vector_pop(pv));
     }
 
     printf("Capacity, Size: %i, %i...\n", vector_capacity(pv), vector_size(pv));
+    
 
     return (0);
 }
