@@ -3,9 +3,9 @@
 // Initialize a vector to be empty
 // Pre: 'vector' != NULL
 void vector_init(Vector *vector) {
-    vector->top=0;
-    vector->size=10;
-    vector->data=malloc(sizeof(void*)*(vector->size));
+    vector->top = 0;
+    vector->size = 10;
+    vector->data = malloc(sizeof(void*) * (vector->size));
 }
 
 // Deallocate internal structures of the vector
@@ -18,11 +18,11 @@ void vector_delete(Vector *vector) {
 // Insert a new element at the end of the vector
 // Pre: 'vector' != NULL
 void vector_push(Vector *vector, void *value) {
-    if (vector->top==vector->size){
-        vector->size=vector->size*2;
-        realloc(vector->data, sizeof(void*)*vector->size);
+    if (vector->top == vector->size) {
+        vector->size = vector->size * 2;
+        realloc(vector->data, sizeof(void*) * vector->size);
     } 
-    vector->data[vector->top]=value;
+    vector->data[vector->top] = value;
     vector->top++;
 }
 
