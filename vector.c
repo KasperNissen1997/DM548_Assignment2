@@ -33,9 +33,6 @@ void vector_push(Vector *vector, void *value) {
 // Pre: the vector is non-empty, 'vector' != NULL
 void* vector_pop(Vector *vector) {
     vector->top--;
-    // void* temp = vector_get_element(vector, vector->top);
-    // vector->data[vector->top] = NULL;
-    // return temp; 
     return vector_get_element(vector, vector->top);
 }
 
@@ -58,8 +55,9 @@ void* vector_get_element(const Vector *vector, size_t index) {
 }
 
 // Return a pointer to the underlying array
+// Pre: 'vector' != NULL
 void** vector_get_array(const Vector *vector) {
-    return (vector->data);
+    return vector->data;
 }
 
 // TEMP METHOD - REMOVE WHEN DONE
@@ -93,13 +91,11 @@ int main() {
     }
 
     printf("Getting element at [8] from vector.data: %i\n", vector_get_element(pv, 8));
+    printf("Capacity, Size: %i, %i...\n", vector_capacity(pv), vector_size(pv));
 
     for (int i = pv->top; i > 0; i--) {
         printf("Popping: %i...\n", vector_pop(pv));
     }
-
-    printf("Capacity, Size: %i, %i...\n", vector_capacity(pv), vector_size(pv));
-    
 
     return (0);
 }
