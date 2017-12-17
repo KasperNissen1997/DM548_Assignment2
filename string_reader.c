@@ -36,27 +36,18 @@ int main(int *argc, char *argv[]) {
 
     while ((getline(&line, &buffer, pFile)) != -1) {
         vector_push(pv, (void *) assignNewStringPointer(line));
-        
-        // TODO: Delete this, meant for testing only
-        // printf("Getting element at [0]: %s", vector_get_element(pv, 0));
-    }
-
-    // TODO: Delete this, meant for testing only
-    for (int i = pv->top; i > 0; i--) {
-        printf("Element at [%i]: %s", i - 1, (char *) vector_get_element(pv, i - 1));
-    }
-
-    qsort(vector_get_array(pv), pv->top, sizeof(char *), cstring_cmp);
-
-    // TODO: Delete this, meant for testing only
-    for (int i = pv->top; i > 0; i--) {
-        printf("Element at [%i]: %s", i - 1, (char *) vector_get_element(pv, i - 1));
     }
 
     fclose(pFile);
 
     if (line)
         free(line);
+
+    qsort(vector_get_array(pv), pv->top, sizeof(char *), cstring_cmp);
+
+    for (int i = 0; i < pv->top; i++) {
+        printf("Element at [%i]: %s", i, vector_get_element(pv, i));
+    }
 
     return 0;
 }
@@ -65,7 +56,7 @@ int main(int *argc, char *argv[]) {
 void assignNewStringPointer(char *line) {
     // Asserts enough memory for the entirity of the next string to be read
     // TODO: Explain why a single extra byte is added
-    void *newLine = malloc(strlen(line) + 1);
+    void *newLine = malloc(strlen(line));
     // void *newLine = malloc(sizeof(char) * 256);
 
     // Copies the contents of the 'line' address to the new address at 'newLine'

@@ -14,6 +14,12 @@ void vector_init(Vector *vector) {
 void vector_delete(Vector *vector) {
     vector->top = 0;
     vector->size = 0;
+
+    // TODO: Ensure functionality
+    for (int i = vector->top; i > 0; i--) {
+        free(vector->data[i]);
+    }
+
     free(vector->data);
 }
 
@@ -24,6 +30,8 @@ void vector_push(Vector *vector, void *value) {
         vector->size *= 2;
         vector->data = realloc(vector->data, sizeof(void*) * vector->size);
     }
+
+    vector->data[vector->top] = NULL;
     
     vector->data[vector->top] = value;
     vector->top++;
