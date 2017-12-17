@@ -17,7 +17,7 @@ vector.o: src/vector.c src/vector.h
 clean:
 	rm src/*.o
 
-test: name number length line special
+test: name number length line
 
 name:
 	$(RUNTEST)name.txt > $(TESTOUT)
