@@ -1,9 +1,9 @@
 GCCFLAGS = gcc -Wall
-GDBFLAGS = gdb --args
-SRCPATH = src/
-TESTPATH = test/
+TESTOUT = test/output.txt
+RUNTEST = ./string_reader test/
+CMPTEST = diff test/correct/
 
-all: string_reader
+all: string_reader clean test
 
 string_reader: src/string_reader.o src/vector.o
 	$(GCCFLAGS) -o string_reader src/string_reader.o src/vector.o
@@ -17,5 +17,20 @@ vector.o: src/vector.c src/vector.h
 clean:
 	rm src/*.o
 
-testNames:
-	./string_reader test/testName.txt > test/testNameOutput.txt
+test: name number length line special
+
+name:
+	$(RUNTEST)name.txt > $(TESTOUT)
+	$(CMPTEST)name.txt $(TESTOUT)
+
+number:
+	$(RUNTEST)number.txt > $(TESTOUT)
+	$(CMPTEST)number.txt $(TESTOUT)
+
+length:
+	$(RUNTEST)length.txt > $(TESTOUT)
+	$(CMPTEST)length.txt $(TESTOUT)
+
+line:
+	$(RUNTEST)line.txt > $(TESTOUT)
+	$(CMPTEST)line.txt $(TESTOUT)
