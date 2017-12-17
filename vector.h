@@ -16,8 +16,8 @@ typedef struct Vector Vector;
 // actually define the structs
 struct Vector {
     void** data;
-    int size;
-    int top;
+    size_t size;
+    size_t top;
 };
 
 // Initialize a vector to be empty
