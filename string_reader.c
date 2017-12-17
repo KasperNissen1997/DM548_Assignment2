@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "vector.h"
 
 /*
@@ -28,7 +29,7 @@ int main (char *argc, char* argv[]) {
 
 int main(char *argc, char* argv[]) {
     FILE *pFile = fopen(argv[1], "r");
-    void *buffer = 0;
+    size_t *buffer = (size_t) 0;
     char *line = NULL;
 
     Vector v;
@@ -37,15 +38,15 @@ int main(char *argc, char* argv[]) {
     vector_init(pv);
 
     while ((getline(&line, &buffer, pFile)) != -1) {
-        printf(line);
 
-        vector_push(pv, &line);
+
+        vector_push(pv, (void *) assignNewStringPointer(line));
+
+        printf("Getting element at [0]: %s", vector_get_element(pv, 0));
     }
 
-    printf("\n");
-
     for (int i = pv->top; i > 0; i--) {
-        printf("Popping: %s...\n", vector_pop(pv));
+        printf("Popping: %s", (char *) vector_pop(pv));
     }
     
     printf("Done mah nignog");
@@ -55,4 +56,10 @@ int main(char *argc, char* argv[]) {
         free(line);
 
     return 0;
+}
+
+void assignNewStringPointer(char *line) {
+    void *newLine = malloc(strlen(line) + 1);
+    memcpy(newLine, line, strlen(line));
+    return newLine;
 }
