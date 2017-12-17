@@ -33,7 +33,12 @@ void vector_push(Vector *vector, void *value) {
 // Pre: the vector is non-empty, 'vector' != NULL
 void* vector_pop(Vector *vector) {
     vector->top--;
-    return vector_get_element(vector, vector->top);
+
+    void* pTemp = vector_get_element(vector, vector->top);
+
+    vector->data[vector->top] = NULL;
+
+    return pTemp;
 }
 
 // Return the number of elements in the vector
