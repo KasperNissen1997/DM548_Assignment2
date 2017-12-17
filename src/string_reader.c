@@ -3,12 +3,18 @@
 #include <stdlib.h>
 #include "vector.h"
 
-/* qsort C-string comparison function */ 
-int cstring_cmp(const void *a, const void *b) 
-{ 
-    const char **ia = (const char **)a;
-    const char **ib = (const char **)b;
-    return strcmp(*ia, *ib); 
+// Compares two strings against each other 
+int myStrCmp(const void *str1, const void *str2) 
+{
+    // Creates pointers for use in the 'strcmp' method
+    const char **pStr1 = (const char **)str1;
+    const char **pStr2 = (const char **)str2;
+
+    // Returns:
+    //   < 0; if pStr1 is less than pStr2,
+    //   == 0; if pStr1 is equal to pStr2,
+    //   > 0; if pStr1 is greater than pStr2
+    return strcmp(*pStr1, *pStr2); 
 }
 
 int main(int *argc, char *argv[]) {
@@ -26,21 +32,27 @@ int main(int *argc, char *argv[]) {
     // Initializes the newly constructed vector
     vector_init(pv);
 
+    // Reads lines from the file at the 'pFile' and pushes them to the vector 'v' at 'pv'
     while ((getline(&line, &buffer, pFile)) != -1) {
         vector_push(pv, (void *) assignNewStringPointer(line));
     }
 
+    // Closes the stream from the file at 'pFile'
     fclose(pFile);
 
+    // Releases memory if there is some memory left allocated in 'line'
     if (line)
         free(line);
 
-    qsort(vector_get_array(pv), pv->top, sizeof(char *), cstring_cmp);
+    // Sorts the vector lexicographically by utilizing 'myStrCmp'
+    qsort(vector_get_array(pv), pv->top, sizeof(char *), myStrCmp);
 
+    // Prints out all the elements in the vector 'v' at 'pv'
     for (int i = 0; i < pv->top; i++) {
         printf("%s", vector_get_element(pv, i));
     }
 
+    // Return 0 to indicate a succesfull main call
     return 0;
 }
 
