@@ -48,11 +48,11 @@ int main(int *argc, char *argv[]) {
 void assignNewStringPointer(char *line) {
     // Asserts enough memory for the entirity of the next string to be read
     // TODO: Explain why a single extra byte is added
-    void *newLine = malloc(strlen(line));
+    void *newLine = malloc(strlen(line) + 1);
     // void *newLine = malloc(sizeof(char) * 256);
 
     // Copies the contents of the 'line' address to the new address at 'newLine'
-    memcpy(newLine, line, strlen(line));
+    memcpy(newLine, line, strlen(line) + 1);
     // memcpy(newLine, line, sizeof(char) * 256);
 
     // Returns the new address
