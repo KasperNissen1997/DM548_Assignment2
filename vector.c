@@ -21,8 +21,7 @@ void vector_delete(Vector *vector) {
 void vector_push(Vector *vector, void *value) {
     if (vector->top == vector->size-1) {
         vector->size = vector->size * 2;
-        printf("here we are");
-        realloc(vector->data, sizeof(void*) * vector->size);
+        vector->data=realloc(vector->data, sizeof(void*) * vector->size);
     } 
     vector->data[vector->top] = value;
     vector->top++;
