@@ -3,14 +3,6 @@
 #include <stdlib.h>
 #include "vector.h"
 
-/*void myArrSort(Vector *v) {
-    void data = vector_get_array(v);
-
-    for (int size = vector_size(v); size > 0; size--) {
-        data[size]
-    }
-}*/
-
 /* qsort C-string comparison function */ 
 int cstring_cmp(const void *a, const void *b) 
 { 
@@ -46,7 +38,7 @@ int main(int *argc, char *argv[]) {
     qsort(vector_get_array(pv), pv->top, sizeof(char *), cstring_cmp);
 
     for (int i = 0; i < pv->top; i++) {
-        printf("Element at [%i]: %s", i, vector_get_element(pv, i));
+        printf("%s", vector_get_element(pv, i));
     }
 
     return 0;
@@ -56,11 +48,11 @@ int main(int *argc, char *argv[]) {
 void assignNewStringPointer(char *line) {
     // Asserts enough memory for the entirity of the next string to be read
     // TODO: Explain why a single extra byte is added
-    void *newLine = malloc(strlen(line));
+    void *newLine = malloc(strlen(line) + 1);
     // void *newLine = malloc(sizeof(char) * 256);
 
     // Copies the contents of the 'line' address to the new address at 'newLine'
-    memcpy(newLine, line, strlen(line));
+    memcpy(newLine, line, strlen(line) + 1);
     // memcpy(newLine, line, sizeof(char) * 256);
 
     // Returns the new address
