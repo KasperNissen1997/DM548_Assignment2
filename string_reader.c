@@ -14,15 +14,10 @@ int main (char *argc, char* argv[]){
     vector_init(&v);
 
     while(fgets(line,sizeof(line), file)){
-        strcpy(lines[count], line);
-        count++; 
-    }
-    while(count!=0){
-        vector_push(&v, lines[count]);
-        count--;
+        char* pntr=linemem(line);
+        vector_push(&v, pntr); 
     }
 
-    vector_push(&v, &line);
     
     while(vector_size(&v)){
         printf("%s", (char*) vector_pop(&v));
@@ -33,3 +28,10 @@ int main (char *argc, char* argv[]){
     return 0;
 
 }
+
+
+    void linemem(char* line){
+        void *a = malloc(sizeof(char*)*256);
+        memcpy(a, line, sizeof(char*)*256);
+        return a;
+    }
