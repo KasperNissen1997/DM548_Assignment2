@@ -19,3 +19,7 @@ clean:
 
 testNames:
 	./string_reader test/testName.txt > test/testNameOutput.txt
+
+testLong:
+	./string_reader test/langtest.txt > test/testNameOutput.txt
+	diff test/testNameOutput.txt test/correct/langtest.txt
